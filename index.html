@@ -19,10 +19,19 @@
   <meta property="twitter:url" content="https://uziscode.com/" />
   <meta property="twitter:title" content="UzisCode - YouTube Enhancement Tools" />
   <meta property="twitter:description" content="Simple, focused Chrome extensions to enhance your YouTube experience." />
-  <script type="module" crossorigin src="/assets/index-Bj0ytIGv.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BWRplo2o.css">
+  <script type="module" crossorigin src="/assets/index-D2BLV4PE.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D5ITlLwS.css">
 </head>
 <body>
 <div id="root"></div>
+<script>
+  (function(){
+    let redirect = sessionStorage.redirect;
+    delete sessionStorage.redirect;
+    if (redirect && redirect != location.href) {
+      history.replaceState(null, null, redirect);
+    }
+  })();
+</script>
 </body>
 </html>
