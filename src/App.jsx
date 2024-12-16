@@ -61,7 +61,7 @@ const Homepage = ({ onNavigate }) => {
                     </div>
                     <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <X className="w-8 h-8 text-red-600 mx-auto mb-2" />
-                        <h3 className="text-sm font-medium">End Screen Blocker</h3>
+                        <h3 className="text-sm font-medium">YouTube Clean Endings</h3>
                     </div>
                     <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <Eye className="w-8 h-8 text-green-600 mx-auto mb-2" />
