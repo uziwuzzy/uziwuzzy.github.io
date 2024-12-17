@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { Mail, Twitter, Clock, Chrome, Eye, X, Youtube, ArrowLeft } from 'lucide-react';
+import { version } from '../package.json';
+
 const Homepage = ({ onNavigate }) => {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -15,68 +17,65 @@ const Homepage = ({ onNavigate }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center items-center">
-            <div className={`text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
-                <Youtube className="w-16 h-16 text-red-600 mx-auto mb-6" />
-                <h1 className="text-5xl font-bold text-gray-900 mb-4">
-                    solving personal problems
-                </h1>
-                <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
-                    Simple, focused Chrome extensions to enhance your YouTube experience.
-                    Built with attention to detail and privacy in mind.
-                </p>
+        <div className="min-h-screen bg-gray-50 flex flex-col justify-between">
+            <div className={`flex-grow flex items-center justify-center`}>
+                <div className={`text-center transform transition-all duration-700 px-4 pb-24 sm:pb-0 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`}>
+                    <Youtube className="w-16 h-16 text-red-600 mx-auto mb-6" />
+                    <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                        solving personal problems
+                    </h1>
+                    <p className="text-xl text-gray-600 mb-8 max-w-lg mx-auto">
+                        Simple, focused Chrome extensions to enhance your YouTube experience.
+                        Built with attention to detail and privacy in mind.
+                    </p>
 
-                {/* Stats */}
-                <div className="flex justify-center gap-8 mb-12">
-                    {stats.map((stat, index) => (
-                        <div key={index} className="text-center">
-                            <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                            <div className="text-sm text-gray-500">{stat.label}</div>
+                    <div className="flex justify-center gap-8 mb-12">
+                        {stats.map((stat, index) => (
+                            <div key={index} className="text-center">
+                                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
+                                <div className="text-sm text-gray-500">{stat.label}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <a href="mailto:uziscode@gmail.com" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+                            <Mail className="w-5 h-5 mr-2" />
+                            uziscode@gmail.com
+                        </a>
+                        <a href="https://twitter.com/uziscode" className="flex items-center text-gray-600 hover:text-gray-900 transition-colors">
+                            <Twitter className="w-5 h-5 mr-2" />
+                            @uziscode
+                        </a>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
+                        <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                            <h3 className="text-sm font-medium">Timestamp Saver</h3>
                         </div>
-                    ))}
-                </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <X className="w-8 h-8 text-red-600 mx-auto mb-2" />
+                            <h3 className="text-sm font-medium">YouTube Clean Endings</h3>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <Eye className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                            <h3 className="text-sm font-medium">Watch Counter</h3>
+                        </div>
+                    </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                    <a
-                        href="mailto:uziscode@gmail.com"
-                        className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
+                    <button
+                        onClick={() => onNavigate('extensions')}
+                        className="text-blue-600 hover:text-blue-800 font-medium text-lg group flex items-center justify-center mx-auto py-4 active:scale-95 transition-transform"
                     >
-                        <Mail className="w-5 h-5 mr-2" />
-                        uziscode@gmail.com
-                    </a>
-                    <a
-                        href="https://twitter.com/uziscode"
-                        className="flex items-center text-gray-600 hover:text-gray-900 transition-colors"
-                    >
-                        <Twitter className="w-5 h-5 mr-2" />
-                        @uziscode
-                    </a>
+                        View Chrome Extensions
+                        <span className="inline-block transition-transform group-hover:translate-x-1 ml-1">→</span>
+                    </button>
                 </div>
-
-                {/* Extension Preview */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-8 px-4">
-                    <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                        <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                        <h3 className="text-sm font-medium">Timestamp Saver</h3>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                        <X className="w-8 h-8 text-red-600 mx-auto mb-2" />
-                        <h3 className="text-sm font-medium">YouTube Clean Endings</h3>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                        <Eye className="w-8 h-8 text-green-600 mx-auto mb-2" />
-                        <h3 className="text-sm font-medium">Watch Counter</h3>
-                    </div>
-                </div>
-
-                <button
-                    onClick={() => onNavigate('extensions')}
-                    className="text-blue-600 hover:text-blue-800 font-medium text-lg group flex items-center justify-center mx-auto"
-                >
-                    View Chrome Extensions
-                    <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-                </button>
             </div>
+            <footer className="w-full py-4 text-center text-sm text-gray-500">
+                <p>Version {version}</p>
+            </footer>
         </div>
     );
 };
@@ -344,31 +343,110 @@ const PrivacyPolicyPage = ({onNavigate}) => {
         </div>
     );
 };
-
 function App() {
     const [currentPage, setCurrentPage] = useState('home');
+    const [notFound, setNotFound] = useState(false);
+
+    // Define all valid routes and their corresponding pages
+    const routes = {
+        '': 'home',
+        'extensions': 'extensions',
+        'youtube-clean-endings/privacy-policy': 'privacy-policy',
+        'youtube-timestamp-saver/privacy-policy': 'timestamp-privacy',
+        'youtube-watch-counter/privacy-policy': 'counter-privacy',
+        // Add more routes as needed
+    };
+
+    // Function to parse the current path and return the corresponding page
+    const getPageFromPath = (path) => {
+        // Remove leading and trailing slashes and handle empty path
+        const cleanPath = path.replace(/^\/+|\/+$/g, '');
+
+        // Check if the path exists in our routes
+        if (cleanPath in routes) {
+            setNotFound(false);
+            return routes[cleanPath];
+        }
+
+        // Path not found
+        setNotFound(true);
+        return 'not-found';
+    };
+
+    // Handle initial route and browser navigation
+    useEffect(() => {
+        const handleLocation = () => {
+            const page = getPageFromPath(window.location.pathname);
+            setCurrentPage(page);
+        };
+
+        // Handle initial load
+        handleLocation();
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', handleLocation);
+        return () => window.removeEventListener('popstate', handleLocation);
+    }, []);
 
     const handleNavigate = (page) => {
-        setCurrentPage(page);
-        // Update the URL without using router
         const paths = {
             'home': '/',
             'extensions': '/extensions',
-            'privacy-policy': '/youtube-clean-endings/privacy-policy'
+            'privacy-policy': '/youtube-clean-endings/privacy-policy',
+            'timestamp-privacy': '/youtube-timestamp-saver/privacy-policy',
+            'counter-privacy': '/youtube-watch-counter/privacy-policy',
+            // Add more paths as needed
         };
-        window.history.pushState({}, '', paths[page]);
+
+        const newPath = paths[page] || '/';
+
+        // Reset not found state when navigating
+        setNotFound(false);
+
+        // Only update if we're actually changing pages
+        if (getPageFromPath(newPath) !== currentPage) {
+            setCurrentPage(page);
+            window.history.pushState({}, '', newPath);
+        }
     };
 
-    switch(currentPage) {
-        case 'home':
-            return <Homepage onNavigate={handleNavigate} />;
-        case 'extensions':
-            return <ExtensionsPage onNavigate={handleNavigate} />;
-        case 'privacy-policy':
-            return <PrivacyPolicyPage onNavigate={handleNavigate} />;
-        default:
-            return <Homepage onNavigate={handleNavigate} />;
-    }
+    // 404 Page Component
+    const NotFoundPage = ({ onNavigate }) => (
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+            <div className="text-center">
+                <h1 className="text-4xl font-bold text-gray-900 mb-4">404 - Page Not Found</h1>
+                <p className="text-gray-600 mb-8">The page you're looking for doesn't exist.</p>
+                <button
+                    onClick={() => onNavigate('home')}
+                    className="text-blue-600 hover:text-blue-800 font-medium text-lg group flex items-center justify-center mx-auto"
+                >
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to Home
+                </button>
+            </div>
+        </div>
+    );
+
+    const renderPage = () => {
+        if (notFound) {
+            return <NotFoundPage onNavigate={handleNavigate} />;
+        }
+
+        switch(currentPage) {
+            case 'extensions':
+                return <ExtensionsPage onNavigate={handleNavigate} />;
+            case 'privacy-policy':
+                return <PrivacyPolicyPage onNavigate={handleNavigate} />;
+            case 'timestamp-privacy':
+                return <PrivacyPolicyPage onNavigate={handleNavigate} product="Timestamp Saver" />;
+            case 'counter-privacy':
+                return <PrivacyPolicyPage onNavigate={handleNavigate} product="Watch Counter" />;
+            default:
+                return <Homepage onNavigate={handleNavigate} />;
+        }
+    };
+
+    return renderPage();
 }
 
 export default App;

@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <title>Redirecting...</title>
     <script>
-        const path = window.location.pathname;
+        // Store the full URL in sessionStorage
         sessionStorage.redirect = window.location.href;
+        // Redirect to the root
         window.location.href = '/';
     </script>
 </head>

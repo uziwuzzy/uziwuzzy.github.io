@@ -28,7 +28,10 @@
     const redirect = sessionStorage.redirect;
     delete sessionStorage.redirect;
     if (redirect && redirect !== location.href) {
-      history.replaceState(null, null, redirect);
+      const url = new URL(redirect);
+      history.replaceState(null, null, url.pathname);
+      // Dispatch a popstate event to ensure the app handles the new path
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   })();
 </script>
