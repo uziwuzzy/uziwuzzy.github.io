@@ -1,14 +1,14 @@
 {
   "name": "uziscode-landing",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "homepage": "https://uziscode.com",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp 404.html dist/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
