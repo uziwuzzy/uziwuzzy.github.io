@@ -52,7 +52,7 @@ const Homepage = ({ onNavigate }) => {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-12">
                         <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                             <Clock className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-                            <h3 className="text-sm font-medium">Timestamp Saver</h3>
+                            <h3 className="text-sm font-medium">Momento - YouTube Timestamp Saver</h3>
                         </div>
                         <div className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                             <X className="w-8 h-8 text-red-600 mx-auto mb-2" />
@@ -84,7 +84,7 @@ const Homepage = ({ onNavigate }) => {
 const ExtensionsPage = ({ onNavigate }) => {
     const extensions = [
         {
-            title: "Youtube Timestamp Saver",
+            title: "Momento - YouTube Timestamp Saver",
             description: "Save and manage timestamps while watching YouTube videos with keyboard shortcuts and easy sharing options.",
             icon: <Clock className="w-12 h-12 text-blue-600" />,
             features: [
@@ -93,7 +93,8 @@ const ExtensionsPage = ({ onNavigate }) => {
                 "Share specific video moments",
                 "Export and import timestamp data"
             ],
-            chromeStoreLink: "#"
+            chromeStoreLink: "#",
+            privacyUrl: "timestamp-privacy"
         },
         {
             title: "YouTube Clean Endings",
@@ -106,10 +107,10 @@ const ExtensionsPage = ({ onNavigate }) => {
                 "Minimal permissions required"
             ],
             chromeStoreLink: "#",
-            privacyUrl: "/youtube-clean-endings/privacy-policy"
+            privacyUrl: "privacy-policy"
         },
         {
-            title: "YouTube Watch Counter",
+            title: "Watch Counter",
             description: "Track your YouTube watching habits with detailed progress tracking and customizable settings.",
             icon: <Eye className="w-12 h-12 text-green-600" />,
             features: [
@@ -118,7 +119,8 @@ const ExtensionsPage = ({ onNavigate }) => {
                 "Customizable watched thresholds",
                 "Data persists across sessions"
             ],
-            chromeStoreLink: "#"
+            chromeStoreLink: "#",
+            privacyUrl: "counter-privacy"
         }
     ];
 
@@ -184,7 +186,7 @@ const ExtensionsPage = ({ onNavigate }) => {
                                     {extension.privacyUrl && (
                                         <div className="mt-4 text-center">
                                             <button
-                                                onClick={() => onNavigate('privacy-policy')}
+                                                onClick={() => onNavigate(extension.privacyUrl)}
                                                 className="text-sm text-blue-600 hover:text-blue-800"
                                             >
                                                 Privacy Policy
@@ -220,8 +222,114 @@ const ExtensionsPage = ({ onNavigate }) => {
 
 
 
+const PrivacyPolicyPage = ({onNavigate, product = "YouTube Clean Endings"}) => {
+    // Configure content based on product
+    const content = {
+        "YouTube Clean Endings": {
+            title: "YouTube Clean Endings",
+            lastUpdated: "December 16, 2024",
+            sections: [
+                {
+                    title: "Overview",
+                    content: "YouTube Clean Endings is committed to protecting your privacy. This privacy policy explains our data collection practices, or more specifically, our lack thereof. Our extension is designed to function without collecting, storing, or transmitting any user data."
+                },
+                {
+                    title: "Data Collection and Usage",
+                    content: "YouTube Clean Endings does not collect, store, or transmit any:",
+                    bullets: [
+                        "Personal information",
+                        "Browsing history",
+                        "Video watching habits",
+                        "Usage statistics",
+                        "Cookies",
+                        "Analytics data",
+                        "User preferences",
+                        "Any other form of user data"
+                    ]
+                },
+                {
+                    title: "How the Extension Works",
+                    content: "The extension operates entirely within your browser and only:",
+                    bullets: [
+                        "Runs on YouTube.com domains",
+                        "Modifies the appearance of YouTube end screens",
+                        "Uses standard Chrome extension permissions (activeTab only)",
+                        "Functions locally without external servers"
+                    ]
+                },
+                {
+                    title: "Technical Operation",
+                    content: "Our extension:",
+                    bullets: [
+                        "Only activates on YouTube.com websites",
+                        "Does not communicate with any external servers",
+                        "Does not store any data, locally or remotely",
+                        "Does not use cookies or any tracking mechanisms",
+                        "Does not modify any user data"
+                    ]
+                }
+            ]
+        },
+        "Momento": {
+            title: "Momento - YouTube Timestamp Saver",
+            lastUpdated: "December 18, 2024",
+            sections: [
+                {
+                    title: "Zero Data Collection Policy",
+                    content: "Momento is designed with complete privacy in mind. We believe your data should stay on your device. This extension:",
+                    bullets: [
+                        "Collects ZERO personal information",
+                        "Stores ZERO data on external servers",
+                        "Requires NO account creation",
+                        "Uses NO analytics or tracking",
+                        "Sends NO data anywhere outside your browser"
+                    ]
+                },
+                {
+                    title: "Local Storage Only",
+                    content: "",
+                    bullets: [
+                        "All timestamps are stored exclusively in your browser's local storage",
+                        "Data never leaves your device",
+                        "You have complete control of your data",
+                        "Export/import feature works entirely offline",
+                        "You can delete all data at any time through the extension settings"
+                    ]
+                },
+                {
+                    title: "Permissions Explained",
+                    content: "We use minimal permissions, only what's necessary for basic functionality:",
+                    bullets: [
+                        '"activeTab": Only to interact with YouTube when you\'re watching a video',
+                        '"storage": To save your timestamps locally on your device',
+                        '"scripting": To add timestamp buttons on YouTube pages',
+                        'YouTube.com host permission: To save timestamps only on YouTube videos'
+                    ],
+                    additionalContent: "We DO NOT request permissions for:",
+                    additionalBullets: [
+                        "Your browsing history",
+                        "Your personal data",
+                        "Your location",
+                        "Any external services"
+                    ]
+                },
+                {
+                    title: "Transparency",
+                    content: "",
+                    bullets: [
+                        "Our code is focused on privacy",
+                        "No external services or APIs are used",
+                        "No third-party analytics",
+                        "No cookies used",
+                        "No user tracking of any kind"
+                    ]
+                }
+            ]
+        }
+    };
 
-const PrivacyPolicyPage = ({onNavigate}) => {
+    const productContent = content[product === "Timestamp Saver" ? "Momento" : product];
+
     return (
         <div className="min-h-screen bg-gray-50">
             <div className="max-w-3xl mx-auto px-4 py-16">
@@ -235,105 +343,62 @@ const PrivacyPolicyPage = ({onNavigate}) => {
 
                 <div className="bg-white rounded-lg shadow-sm p-8">
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                        Privacy Policy - YouTube Clean Endings
+                        Privacy Policy - {productContent.title}
                     </h1>
 
-                    <p className="text-sm text-gray-500 mb-8">Last Updated: December 16, 2024</p>
+                    <p className="text-sm text-gray-500 mb-8">Last Updated: {productContent.lastUpdated}</p>
 
                     <div className="space-y-8 text-gray-600">
+                        {productContent.sections.map((section, index) => (
+                            <section key={index}>
+                                <h2 className="text-2xl font-semibold text-gray-900 mb-3">{section.title}</h2>
+                                {section.content && <p className="mb-3">{section.content}</p>}
+                                {section.bullets && (
+                                    <ul className="list-disc pl-6 space-y-2 mb-3">
+                                        {section.bullets.map((bullet, idx) => (
+                                            <li key={idx}>{bullet}</li>
+                                        ))}
+                                    </ul>
+                                )}
+                                {section.additionalContent && (
+                                    <>
+                                        <p className="mb-3 mt-6">{section.additionalContent}</p>
+                                        <ul className="list-disc pl-6 space-y-2">
+                                            {section.additionalBullets.map((bullet, idx) => (
+                                                <li key={idx}>{bullet}</li>
+                                            ))}
+                                        </ul>
+                                    </>
+                                )}
+                            </section>
+                        ))}
+
                         <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Overview</h2>
+                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Contact</h2>
                             <p>
-                                YouTube Clean Endings is committed to protecting your privacy. This privacy policy
-                                explains our data collection practices, or more specifically, our lack thereof.
-                                Our extension is designed to function without collecting, storing, or transmitting
-                                any user data.
-                            </p>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Data Collection and Usage</h2>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">What We Collect</h3>
-                            <p className="mb-3">YouTube Clean Endings does not collect, store, or transmit any:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Personal information</li>
-                                <li>Browsing history</li>
-                                <li>Video watching habits</li>
-                                <li>Usage statistics</li>
-                                <li>Cookies</li>
-                                <li>Analytics data</li>
-                                <li>User preferences</li>
-                                <li>Any other form of user data</li>
-                            </ul>
-
-                            <h3 className="text-lg font-medium text-gray-900 mt-6 mb-2">How the Extension Works</h3>
-                            <p className="mb-3">The extension operates entirely within your browser and only:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Runs on YouTube.com domains</li>
-                                <li>Modifies the appearance of YouTube end screens</li>
-                                <li>Uses standard Chrome extension permissions (activeTab only)</li>
-                                <li>Functions locally without external servers</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Technical Operation</h2>
-                            <p className="mb-3">Our extension:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Only activates on YouTube.com websites</li>
-                                <li>Does not communicate with any external servers</li>
-                                <li>Does not store any data, locally or remotely</li>
-                                <li>Does not use cookies or any tracking mechanisms</li>
-                                <li>Does not modify any user data</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Permissions</h2>
-                            <p className="mb-3">The extension requires minimal permissions:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li><code className="bg-gray-100 px-2 py-1 rounded">activeTab</code>: Used only to modify YouTube end screen elements</li>
-                                <li>No additional permissions are requested or required</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Compliance</h2>
-                            <p className="mb-3">This extension complies with:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Chrome Web Store Developer Program Policies</li>
-                                <li>General Data Protection Regulation (GDPR)</li>
-                                <li>California Consumer Privacy Act (CCPA)</li>
-                                <li>Children's Online Privacy Protection Act (COPPA)</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Changes to Privacy Policy</h2>
-                            <p className="mb-3">If we make any changes to this privacy policy, we will:</p>
-                            <ul className="list-disc pl-6 space-y-2">
-                                <li>Update the "Last Updated" date at the top</li>
-                                <li>Post the new policy in the Chrome Web Store</li>
-                                <li>Notify users through the extension's store page</li>
-                            </ul>
-                        </section>
-
-                        <section>
-                            <h2 className="text-2xl font-semibold text-gray-900 mb-3">Contact Information</h2>
-                            <p>
-                                If you have questions about this privacy policy, you can email us at{' '}
+                                For privacy-related questions:
+                                <br />
+                                Email:{' '}
                                 <a
                                     href="mailto:uziscode@gmail.com"
                                     className="text-blue-600 hover:text-blue-800"
                                 >
                                     uziscode@gmail.com
                                 </a>
+                                <br />
+                                Twitter:{' '}
+                                <a
+                                    href="https://twitter.com/uziscode"
+                                    className="text-blue-600 hover:text-blue-800"
+                                >
+                                    @uziscode
+                                </a>
                             </p>
                         </section>
 
                         <footer className="pt-6 mt-6 border-t border-gray-200">
                             <p className="text-sm text-gray-500">
-                                This privacy policy is effective as of December 16, 2024 and will remain in effect except
+                                This privacy policy is effective as of {productContent.lastUpdated} and will remain in effect except
                                 with respect to any changes in its provisions in the future.
                             </p>
                         </footer>
@@ -343,50 +408,35 @@ const PrivacyPolicyPage = ({onNavigate}) => {
         </div>
     );
 };
+
+// NotFoundPage component
+const NotFoundPage = ({ onNavigate }) => (
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+        <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">404 - Page Not Found</h1>
+            <p className="text-gray-600 mb-8">The page you're looking for doesn't exist.</p>
+            <button
+                onClick={() => onNavigate('home')}
+                className="text-blue-600 hover:text-blue-800 font-medium text-lg group flex items-center justify-center mx-auto"
+            >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+            </button>
+        </div>
+    </div>
+);
+
 function App() {
     const [currentPage, setCurrentPage] = useState('home');
     const [notFound, setNotFound] = useState(false);
 
-    // Define all valid routes and their corresponding pages
     const routes = {
         '': 'home',
         'extensions': 'extensions',
         'youtube-clean-endings/privacy-policy': 'privacy-policy',
         'youtube-timestamp-saver/privacy-policy': 'timestamp-privacy',
         'youtube-watch-counter/privacy-policy': 'counter-privacy',
-        // Add more routes as needed
     };
-
-    // Function to parse the current path and return the corresponding page
-    const getPageFromPath = (path) => {
-        // Remove leading and trailing slashes and handle empty path
-        const cleanPath = path.replace(/^\/+|\/+$/g, '');
-
-        // Check if the path exists in our routes
-        if (cleanPath in routes) {
-            setNotFound(false);
-            return routes[cleanPath];
-        }
-
-        // Path not found
-        setNotFound(true);
-        return 'not-found';
-    };
-
-    // Handle initial route and browser navigation
-    useEffect(() => {
-        const handleLocation = () => {
-            const page = getPageFromPath(window.location.pathname);
-            setCurrentPage(page);
-        };
-
-        // Handle initial load
-        handleLocation();
-
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', handleLocation);
-        return () => window.removeEventListener('popstate', handleLocation);
-    }, []);
 
     const handleNavigate = (page) => {
         const paths = {
@@ -395,37 +445,37 @@ function App() {
             'privacy-policy': '/youtube-clean-endings/privacy-policy',
             'timestamp-privacy': '/youtube-timestamp-saver/privacy-policy',
             'counter-privacy': '/youtube-watch-counter/privacy-policy',
-            // Add more paths as needed
         };
 
         const newPath = paths[page] || '/';
-
-        // Reset not found state when navigating
         setNotFound(false);
 
-        // Only update if we're actually changing pages
         if (getPageFromPath(newPath) !== currentPage) {
             setCurrentPage(page);
             window.history.pushState({}, '', newPath);
         }
     };
 
-    // 404 Page Component
-    const NotFoundPage = ({ onNavigate }) => (
-        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-            <div className="text-center">
-                <h1 className="text-4xl font-bold text-gray-900 mb-4">404 - Page Not Found</h1>
-                <p className="text-gray-600 mb-8">The page you're looking for doesn't exist.</p>
-                <button
-                    onClick={() => onNavigate('home')}
-                    className="text-blue-600 hover:text-blue-800 font-medium text-lg group flex items-center justify-center mx-auto"
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to Home
-                </button>
-            </div>
-        </div>
-    );
+    const getPageFromPath = (path) => {
+        const cleanPath = path.replace(/^\/+|\/+$/g, '');
+        if (cleanPath in routes) {
+            setNotFound(false);
+            return routes[cleanPath];
+        }
+        setNotFound(true);
+        return 'not-found';
+    };
+
+    useEffect(() => {
+        const handleLocation = () => {
+            const page = getPageFromPath(window.location.pathname);
+            setCurrentPage(page);
+        };
+
+        handleLocation();
+        window.addEventListener('popstate', handleLocation);
+        return () => window.removeEventListener('popstate', handleLocation);
+    }, []);
 
     const renderPage = () => {
         if (notFound) {
@@ -436,9 +486,9 @@ function App() {
             case 'extensions':
                 return <ExtensionsPage onNavigate={handleNavigate} />;
             case 'privacy-policy':
-                return <PrivacyPolicyPage onNavigate={handleNavigate} />;
+                return <PrivacyPolicyPage onNavigate={handleNavigate} product="YouTube Clean Endings" />;
             case 'timestamp-privacy':
-                return <PrivacyPolicyPage onNavigate={handleNavigate} product="Timestamp Saver" />;
+                return <PrivacyPolicyPage onNavigate={handleNavigate} product="Momento" />;
             case 'counter-privacy':
                 return <PrivacyPolicyPage onNavigate={handleNavigate} product="Watch Counter" />;
             default:
@@ -446,7 +496,7 @@ function App() {
         }
     };
 
+
     return renderPage();
 }
-
 export default App;
