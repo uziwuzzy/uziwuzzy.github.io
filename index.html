@@ -19,8 +19,8 @@
   <meta property="twitter:url" content="https://uziscode.com/" />
   <meta property="twitter:title" content="UzisCode - YouTube Enhancement Tools" />
   <meta property="twitter:description" content="Simple, focused Chrome extensions to enhance your YouTube experience." />
-  <script type="module" crossorigin src="/assets/index-DzQxXHaf.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-D5ITlLwS.css">
+  <script type="module" crossorigin src="/assets/index-kbw_sneu.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BSaNtfx8.css">
 </head>
 <body>
 <div id="root"></div>
@@ -29,7 +29,10 @@
     const redirect = sessionStorage.redirect;
     delete sessionStorage.redirect;
     if (redirect && redirect !== location.href) {
-      history.replaceState(null, null, redirect);
+      const url = new URL(redirect);
+      history.replaceState(null, null, url.pathname);
+      // Dispatch a popstate event to ensure the app handles the new path
+      window.dispatchEvent(new PopStateEvent('popstate'));
     }
   })();
 </script>
